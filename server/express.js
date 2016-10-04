@@ -3,12 +3,13 @@ import path from "path";
 
 import basicHarmon from "./basicHarmon";
 import proxy from "./proxy";
+import tagsHarmon from "./tagsHarmon";
 import target from "./target";
 
 const app = express();
 
 // middleware functions
-app.use(target, basicHarmon, proxy);
+app.use(target, basicHarmon, tagsHarmon, proxy);
 
 app.listen(
   3000,
