@@ -18,6 +18,7 @@ targetRouter.use("/target", function (req, res) {
     <p>Some awesome content.</p>
     <my-example name="Jack"></my-example>
     <my-example name="Jill"></my-example>
+    <post-list></post-list>
     <footer>It all ends here in the footer</footer>
   </body>
 </html>
