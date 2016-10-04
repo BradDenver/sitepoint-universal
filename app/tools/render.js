@@ -31,6 +31,11 @@ function renderNode (tag, Comp, node, i) {
 
   attrs.map((attr) => props[attr.name] = attr.value);
 
+  if (typeof Comp.propsFn === "function") props = {
+    ...props,
+    ...Comp.propsFn(props, i),
+  };
+
   if (!!props.class) {
     props.className = props.class;
     delete props.class;
@@ -45,6 +50,11 @@ function renderNode (tag, Comp, node, i) {
 function serverRenderNode (tag, Comp, node, req) {
   let props = node.getAttributes();
   __id++;
+
+  if (typeof Comp.propsFn === "function") props = {
+    ...props,
+    ...Comp.propsFn(props, __id, req),
+  };
 
   if (!!props.class) {
     props.className = props.class;
