@@ -19,6 +19,7 @@ http.createServer(function (req, res) {
     <my-example name="Jill"></my-example>
     <post-list></post-list>
     <footer>It all ends here in the footer</footer>
+    <script src="/webpack/bundle.js"></script>
   </body>
 </html>
   `);

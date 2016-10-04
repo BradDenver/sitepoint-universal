@@ -8,6 +8,8 @@ import "./target";
 
 const app = express();
 
+app.get("/webpack/bundle.js", (req, res) => res.sendFile(path.resolve(`${__dirname}/../webpack/bundle.js`)));
+
 // middleware functions
 app.use(basicHarmon, tagsHarmon, proxy);
 

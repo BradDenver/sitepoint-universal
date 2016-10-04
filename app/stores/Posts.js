@@ -3,7 +3,7 @@ import { action, observable, runInAction } from "mobx";
 
 import hasDocument from "../tools/hasDocument";
 
-const base = "https://silly-api-auwyjsccqg.now.sh";
+const base = "https://silly-api-mwwrappnbn.now.sh";
 
 export default class Posts {
   type;
