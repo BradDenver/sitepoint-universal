@@ -1,5 +1,6 @@
 import fetch from "isomorphic-fetch";
 import { action, observable, runInAction } from "mobx";
+import sn from "selectn";
 
 import hasDocument from "../tools/hasDocument";
 
@@ -14,7 +15,7 @@ export default class Posts {
 
   constructor (type = "Normal") {
     this.type = type;
-    (hasDocument) ? this.load() : this.loadPoll();
+    (hasDocument) ? this.loadClientInitial() : this.loadPoll();
   }
 
   loadPoll () {
@@ -35,6 +36,13 @@ export default class Posts {
         });
       })
       .catch((err) => console.log(err));
+  }
+
+  @action loadClientInitial () {
+    const { posts } = sn(`INITIAL_STATE.posts.${this.type}`, window) || [];
+    this.posts = posts;
+
+    if (!posts.length) this.load();
   }
 
 };

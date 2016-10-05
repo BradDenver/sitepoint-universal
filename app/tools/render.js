@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import ReactDOMServer from "react-dom/server";
 
 import hasDocument from "./hasDocument";
+import clientInitialState from "../stores/clientInitialState";
 
 let __tags = [];
 let __id = 0;
@@ -77,5 +78,5 @@ function serverRenderNode (tag, Comp, node, req) {
 }
 
 export function knownTags() {
-  return __tags;
+  return __tags.concat(clientInitialState);
 }

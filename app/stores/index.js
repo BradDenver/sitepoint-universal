@@ -18,6 +18,9 @@ export var storeOrState = (key, factory, req) => {
 
     if (typeof req.SITEPOINT_state === "undefined") req.SITEPOINT_state = currentState;
 
+    if (typeof req.SITEPOINT_stores === "undefined") req.SITEPOINT_stores = [];
+    req.SITEPOINT_stores.push(key);
+
     return sn(key, req.SITEPOINT_state);
   }
 }
@@ -51,6 +54,18 @@ if (!hasDocument) {
   autorun(() => {
     currentState = serializeState(stores);
   });
+}
+
+export var storesForReq = (req) => {
+  if(typeof req.SITEPOINT_stores === "undefined") return {};
+
+  let reqStores = Array.from(new Set(req.SITEPOINT_stores))
+    .reduce((acc, key) => {
+      _set(acc, key, sn(key, req.SITEPOINT_state));
+      return acc;
+    }, {});
+
+  return reqStores;
 }
 
 export default stores;
