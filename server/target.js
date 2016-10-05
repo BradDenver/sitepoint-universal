@@ -18,7 +18,9 @@ http.createServer(function (req, res) {
     <my-example name="Jack"></my-example>
     <my-example name="Jill"></my-example>
     <post-list></post-list>
+    <post-list type="Cats"></post-list>
     <footer>It all ends here in the footer</footer>
+    <client-initial-state></client-initial-state>
     <script src="/webpack/bundle.js"></script>
   </body>
 </html>
