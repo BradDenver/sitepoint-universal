@@ -1,7 +1,7 @@
 import { observer } from "mobx-react";
 import React, { Component } from "react";
 
-import { storeOrState } from "../stores";
+import { postsStoreFor } from "../stores";
 import render from "../tools/render";
 
 @observer
@@ -18,7 +18,7 @@ export class PostList extends Component {
 
   static propsFn(props, key, req) {
     return {
-      store: storeOrState(req).posts
+      store: postsStoreFor(props.type, req)
     };
   }
 };
