@@ -1,7 +1,7 @@
 import { observer } from "mobx-react";
 import React, { Component } from "react";
 
-import { postsStoreFor } from "../stores";
+import { deregisterStore, postsStoreFor } from "../stores";
 import render from "../tools/render";
 
 @observer
@@ -20,6 +20,15 @@ export class PostList extends Component {
     return {
       store: postsStoreFor(props.type, req)
     };
+  }
+
+  static shouldServerRenderStatic(props, req) {
+    const { store: { loading, posts, type } } = props;
+    const hasCompleteData = posts.length && !loading;
+
+    if (hasCompleteData) deregisterStore(`posts.${type}`, req);
+
+    return hasCompleteData;
   }
 };
 
