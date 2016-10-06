@@ -25,6 +25,15 @@ export var storeOrState = (key, factory, req) => {
   }
 }
 
+export var deregisterStore = (key, req) => {
+  if (typeof req.SITEPOINT_stores === "undefined") return;
+
+  const i = req.SITEPOINT_stores.indexOf(key);
+  if (i === -1) return;
+
+  req.SITEPOINT_stores.splice(i, 1);
+}
+
 export var postsStoreFor = (type = "Normal", req) => {
   const key = `posts.${type}`;
   const factory = () => new Posts(type);

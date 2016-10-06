@@ -62,10 +62,18 @@ function serverRenderNode (tag, Comp, node, req) {
     delete props.class;
   }
 
-  const nodeStream = node.createStream({outer: false});
+  const shouldServerRenderStatic = (typeof Comp.shouldServerRenderStatic === "function")
+    ? Comp.shouldServerRenderStatic(props, req)
+    : false;
+
+  const renderTo = (shouldServerRenderStatic)
+    ? "renderToStaticMarkup"
+    : "renderToString";
+
+  const nodeStream = node.createStream({outer: shouldServerRenderStatic});
 
   try {
-    const html = ReactDOMServer.renderToString(
+    const html = ReactDOMServer[renderTo](
       <Comp { ...props }/>
     );
 
